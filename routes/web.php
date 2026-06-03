@@ -13,6 +13,8 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('barang', BarangController::class);
+    Route::get('peminjaman/export-pdf', [PeminjamanController::class, 'exportPdf'])->name('peminjaman.export-pdf');
+    Route::get('peminjaman/export-excel', [PeminjamanController::class, 'exportExcel'])->name('peminjaman.export-excel');
     Route::resource('peminjaman', PeminjamanController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

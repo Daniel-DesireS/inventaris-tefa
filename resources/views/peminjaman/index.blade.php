@@ -8,10 +8,22 @@
 
 <h2>Data Peminjaman Inventaris TEFA</h2>
 
-<a href="{{ route('peminjaman.create') }}"
-   class="btn btn-success mb-3">
-    Tambah Peminjaman
-</a>
+<div class="d-flex flex-wrap gap-2 mb-3">
+    <a href="{{ route('peminjaman.create') }}"
+       class="btn btn-success">
+        Tambah Peminjaman
+    </a>
+
+    <a href="{{ route('peminjaman.export-pdf') }}"
+       class="btn btn-outline-danger">
+        Export PDF
+    </a>
+
+    <a href="{{ route('peminjaman.export-excel') }}"
+       class="btn btn-outline-success">
+        Export Excel
+    </a>
+</div>
 
 <form method="GET"
       action="{{ route('peminjaman.index') }}">

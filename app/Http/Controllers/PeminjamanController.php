@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Exports\PeminjamanExport;
 use App\Models\Peminjaman;
 use App\Models\Peminjam;
 use App\Models\Barang;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PeminjamanController extends Controller
 {
@@ -111,6 +114,21 @@ class PeminjamanController extends Controller
 
         return redirect()->route('peminjaman.index')
             ->with('success','Data berhasil disimpan');
+    }
+
+    public function exportPdf()
+    {
+        $peminjaman = Peminjaman::with(['peminjam', 'barang'])
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return Pdf::loadView('peminjaman.export-pdf', compact('peminjaman'))
+            ->download('laporan-peminjaman.pdf');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new PeminjamanExport, 'laporan-peminjaman.xlsx');
     }
 
     public function show(string $id)

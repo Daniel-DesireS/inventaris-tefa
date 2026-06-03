@@ -9,21 +9,19 @@ class BarangController extends Controller
 {
     // Menampilkan daftar barang dan fitur pencarian
     public function index(Request $request)
-{
-    $keyword = $request->keyword;
+    {
+        $keyword = $request->input('keyword', $request->input('search'));
 
-    $barang = Barang::when($keyword, function ($query) use ($keyword) {
-        return $query->where(
-            'nama_barang',
-            'like',
-            '%' . $keyword . '%'
-        )
-        ->orWhere(
-            'kategori_barang',
-            'like',
-            '%' . $keyword . '%'
-        );
-         })->get();
+        $barang = Barang::query();
+
+        if ($keyword) {
+            $barang->where(function ($query) use ($keyword) {
+                $query->where('nama_barang', 'like', '%' . $keyword . '%')
+                    ->orWhere('kategori_barang', 'like', '%' . $keyword . '%');
+            });
+        }
+
+        $barang = $barang->get();
 
         return view(
             'barang.index',

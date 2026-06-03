@@ -15,11 +15,18 @@
       action="{{ route('barang.index') }}"
       class="mb-3">
 
-    <input type="text"
-           name="search"
-           class="form-control"
-           placeholder="Cari barang..."
-           value="{{ request('search') }}">
+    <div class="input-group">
+        <input type="text"
+               name="keyword"
+               class="form-control"
+               placeholder="Cari barang..."
+               value="{{ request('keyword', request('search')) }}">
+
+        <button type="submit"
+                class="btn btn-primary">
+            Cari
+        </button>
+    </div>
 
 </form>
 
