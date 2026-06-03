@@ -1,0 +1,37 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Barang;
+
+class BarangSeeder extends Seeder
+{
+    // Mengisi data awal barang inventaris
+    public function run(): void
+    {
+        Barang::create([
+            'nama_barang' => 'Laptop Asus',
+            'kategori_barang' => 'Laptop',
+            'stok' => 10,
+            'kondisi_barang' => 'Baik',
+            'foto' => null
+        ]);
+
+        Barang::create([
+            'nama_barang' => 'Mouse Logitech',
+            'kategori_barang' => 'Aksesoris',
+            'stok' => 15,
+            'kondisi_barang' => 'Baik',
+            'foto' => null
+        ]);
+
+        Barang::create([
+            'nama_barang' => 'Keyboard Mechanical',
+            'kategori_barang' => 'Aksesoris',
+            'stok' => 8,
+            'kondisi_barang' => 'Baik',
+            'foto' => null
+        ]);
+    }
+}
